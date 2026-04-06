@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import { Especialidade } from "./src/types/especialidade";
+import { Paciente } from "./src/types/paciente";
+import { Medico } from "./src/interfaces/medico";
+import { Consulta } from "./src/interfaces/consulta";import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
-type Consulta = {
-  id: number;
-  paciente: string;
-  medico: string;
-  data: string;
-  status: "agendada" | "confirmada" | "cancelada" | "realizada";
-};
 export default function App() {
-  const [consulta, setConsulta] = useState<Consulta>({
+const [consulta, setConsulta] = useState<Consulta>({
+  id: 1,
+  paciente: {
     id: 1,
-    paciente: "Carlos Andrade",
-    medico: "Dr. Roberto Silva",
-    data: "28/02/2026",
-    status: "agendada",
-  });
+    nome: "Carlos Andrade",
+    cpf: "123.456.789-00",
+    email: "carlos@email.com",
+    telefone: "11999999999",
+  },
+  medico: {
+    id: 1,
+    nome: "Dr. Roberto Silva",
+    crm: "123456",
+    especialidade: {
+      id: 1,
+      nome: "Cardiologia",
+      descricao: "Especialista em coração",
+    },
+    ativo: true,
+  },
+  data: new Date(),
+  status: "agendada",
+});
   function confirmarConsulta() {
     setConsulta({
       ...consulta,
@@ -25,14 +37,13 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.titulo}>Sistema de Consultas</Text>
       <View style={styles.card}>
-        <Text>Paciente: {consulta.paciente}</Text>
-        <Text>Médico: {consulta.medico}</Text>
-        <Text>Data: {consulta.data}</Text>
+        <Text>Paciente: {consulta.paciente.nome}</Text>
+        <Text>Médico: {consulta.medico.nome}</Text>
+        <Text>Especialidade: {consulta.medico.especialidade.nome}</Text>
+        <Text>Data: {consulta.data.toLocaleDateString()}</Text>
         <Text>Status: {consulta.status}</Text>
         {consulta.status === "agendada" && (
-          <View style={styles.botao}>
-            <Button title="Confirmar Consulta" onPress={confirmarConsulta} />
-          </View>
+          <Button title="Confirmar Consulta" onPress={confirmarConsulta} />
         )}
       </View>
     </View>
@@ -41,7 +52,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -55,8 +66,5 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderRadius: 8,
-  },
-  botao: {
-    marginTop: 20,
   },
 });
