@@ -33,7 +33,7 @@ src
 ### 1. Clone o repositório
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/AgathaCassari/sistema-consultas-mobile
 ```
 
 ### 2. Entre na pasta
