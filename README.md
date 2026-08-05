@@ -1,4 +1,4 @@
-# 📱 Sistema de Consultas - Mobile
+# Sistema de Consultas - Mobile
 
 Aplicativo mobile desenvolvido em **React Native com Expo** para gerenciamento de consultas médicas.
 
