@@ -35,6 +35,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+*.d.ts.map
+*.js.map
+src/**/*.d.ts
+src/**/*.js
 
 # generated native folders
 /ios

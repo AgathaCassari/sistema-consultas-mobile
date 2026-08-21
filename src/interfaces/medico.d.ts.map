@@ -1,1 +1,0 @@
-{"version":3,"file":"medico.d.ts","sourceRoot":"","sources":["medico.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,wBAAwB,CAAC;AACvD,MAAM,WAAW,MAAM;IACrB,EAAE,EAAE,MAAM,CAAC;IACX,IAAI,EAAE,MAAM,CAAC;IACb,GAAG,EAAE,MAAM,CAAC;IACZ,aAAa,EAAE,aAAa,CAAC;IAC7B,KAAK,EAAE,OAAO,CAAC;CAChB"}

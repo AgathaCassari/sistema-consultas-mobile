@@ -26,109 +26,53 @@ export async function buscarConsultaPorId(id: number): Promise<Consulta> {
  return response.data;
 }
 
-export async function agendarConsulta(
- novaConsulta: NovaConsulta
-): Promise<Consulta> {
-
- console.log(
-  "DADOS RECEBIDOS NO FRONT:",
-  JSON.stringify(novaConsulta, null, 2)
- );
-
+export async function agendarConsulta(novaConsulta: NovaConsulta): Promise<Consulta> {
+ // Monta o payload no formato que o backend Spring Boot espera:
+ // medico e paciente como objetos com apenas o id
  const payload = {
-  medico: {
-   id: novaConsulta.medicoId,
-  },
-  paciente: {
-   id: novaConsulta.pacienteId,
-  },
-  dataHora: novaConsulta.dataHora,
-  status: novaConsulta.status,
-  valor: novaConsulta.valor,
-  observacoes: novaConsulta.observacoes,
+ medico: { id: novaConsulta.medicoId },
+ paciente: { id: novaConsulta.pacienteId },
+ dataHora: novaConsulta.dataHora,
+ status: novaConsulta.status,
+ valor: novaConsulta.valor,
+ observacoes: novaConsulta.observacoes,
  };
-
- console.log(
-  "PAYLOAD ENVIADO PARA O BACK:",
-  JSON.stringify(payload, null, 2)
- );
-
- const response = await api.post<Consulta>(
-  "/consultas",
-  payload
- );
-
+ const response = await api.post<Consulta>("/consultas", payload);
  return response.data;
 }
 
-export async function confirmarConsulta(
- consulta: Consulta
-): Promise<Consulta> {
-
+export async function confirmarConsulta(consulta: Consulta): Promise<Consulta> {
  const payload = {
-  medico: {
-   id: consulta.medico.id,
-  },
-  paciente: {
-   id: consulta.paciente.id,
-  },
-  dataHora: consulta.dataHora,
-  status: "confirmada" as StatusConsulta,
-  valor: consulta.valor,
-  observacoes: consulta.observacoes,
+ medico: { id: consulta.medico.id },
+ paciente: { id: consulta.paciente.id },
+ dataHora: consulta.dataHora,
+ status: "confirmada" as StatusConsulta,
+ valor: consulta.valor,
+ observacoes: consulta.observacoes,
  };
-
- const response = await api.put<Consulta>(
-  `/consultas/${consulta.id}`,
-  payload
- );
-
+ const response = await api.put<Consulta>(`/consultas/${consulta.id}`, payload);
  return response.data;
 }
 
-export async function cancelarConsulta(
- consulta: Consulta
-): Promise<Consulta> {
-
+export async function cancelarConsulta(consulta: Consulta): Promise<Consulta> {
  const payload = {
-  medico: {
-   id: consulta.medico.id,
-  },
-  paciente: {
-   id: consulta.paciente.id,
-  },
-  dataHora: consulta.dataHora,
-  status: "cancelada" as StatusConsulta,
-  valor: consulta.valor,
-  observacoes: consulta.observacoes,
+ medico: { id: consulta.medico.id },
+ paciente: { id: consulta.paciente.id },
+ dataHora: consulta.dataHora,
+ status: "cancelada" as StatusConsulta,
+ valor: consulta.valor,
+ observacoes: consulta.observacoes,
  };
-
- const response = await api.put<Consulta>(
-  `/consultas/${consulta.id}`,
-  payload
- );
-
+ const response = await api.put<Consulta>(`/consultas/${consulta.id}`, payload);
  return response.data;
 }
 
-export async function listarConsultasPorMedico(
- medicoId: number
-): Promise<Consulta[]> {
-
- const response = await api.get<Consulta[]>(
-  `/consultas/medico/${medicoId}`
- );
-
+export async function listarConsultasPorMedico(medicoId: number): Promise<Consulta[]> {
+ const response = await api.get<Consulta[]>(`/consultas/medico/${medicoId}`);
  return response.data;
 }
 
-export async function listarConsultasPorPaciente(
- pacienteId: number
-): Promise<Consulta[]> {
-
- const response = await api.get<Consulta[]>(
-  `/consultas/paciente/${pacienteId}`
- );
-
+export async function listarConsultasPorPaciente(pacienteId: number): Promise<Consulta[]> {
+ const response = await api.get<Consulta[]>(`/consultas/paciente/${pacienteId}`);
  return response.data;
 }
